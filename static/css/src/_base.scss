@@ -13,9 +13,15 @@
 // ----------------------
 // (http://paulirish.com/2012/box-sizing-border-box-ftw/)
 // Use with caution if app needs to support oldIE (6,7,8)
-// * {
-//     @include box-sizing(border-box);
-// }
+// Updated inheritence version: http://blog.teamtreehouse.com/box-sizing-secret-simple-css-layouts#comment-50223
+html {
+    box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
 
 // Body reset
 // -----------
