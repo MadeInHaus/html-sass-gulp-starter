@@ -77,7 +77,7 @@
     height: 0;
     padding-bottom: 56.25%; // 16:9 aspect ratio (adjust accordingly)
     overflow: hidden;
-    iframe, object, embed, video {
+    iframe, object, embed, video, img {
         position: absolute;
         top: 0;
         left: 0;
