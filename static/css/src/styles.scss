@@ -38,6 +38,9 @@ $ui-sprite-dimensions: true;
 // Pages
 @import "pages";
 
+// Stacking order
+@import "zindex";
+
 // Misc
 @import "animations"; // CSS3 Keyframe animations
 @import "utilities"; // Must be last to override
