@@ -1,5 +1,5 @@
 require(['./config'], function() {
-    require(['app/main'], function(app) {
+    require(['app/app'], function(app) {
         // If the module is a function, execute it...
         // Otherwise do nothing
         if (typeof app === 'function') {
