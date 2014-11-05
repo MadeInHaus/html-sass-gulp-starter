@@ -27,7 +27,7 @@ config_path = css_path + "config.rb"
 site_url = 'http://www.google.com' # replace this
 
 # sass execs
-exec_sass_compile = "compass compile {} -c {} --no-line-comments --trace --force -s compressed -r ceaser-easing"
+exec_sass_compile = "compass compile {} -c {} --no-line-comments --trace --force -s compressed"
 
 IGNORED_FILES = (
     '.md',
