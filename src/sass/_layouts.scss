@@ -1,0 +1,40 @@
+//
+// Layouts
+// ---------------------------
+
+.app {
+    width: 90%;
+    max-width: 70em;
+    margin: 5em auto;
+    font-size: 1em;
+}
+
+@include mobile {
+    .app {
+        font-size: 1.1em;
+    }
+}
+
+@include largeMobile {
+    .app {
+        font-size: 1.2em;
+    }
+}
+
+@include tablet {
+    .app {
+        font-size: 1.3em;
+    }
+}
+
+@include desktop {
+    .app {
+        font-size: 1.4em;
+    }
+}
+
+@include largeDesktop {
+    .app {
+        font-size: 1.5em;
+    }
+}

@@ -40,10 +40,6 @@ intermediate
 publish
 .idea
 
-# build script local files
-build/buildinfo.properties
-build/config/buildinfo.properties
-
 # Python
 *.py[co]
 env
@@ -96,7 +92,6 @@ celerybeat.pid
 *.sw[op]
 nohup.out
 project/settings/hosts/localhost.py
-*.css
-icons-*.png
-ui-*.png
-main-*.js
+
+# Keep credentials out of the repo
+settings.json
