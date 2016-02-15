@@ -1,13 +1,38 @@
 {
-    "name": "html-boilerplate",
-    "version": "0.2.0",
-    "devDependencies": {
-        "grunt": "~0.4.5",
-        "grunt-contrib-sass": "~0.8.1",
-        "grunt-contrib-watch": "~0.6.1",
-        "grunt-contrib-jshint": "~0.10.0",
-        "grunt-contrib-connect": "~0.8.0",
-        "grunt-contrib-requirejs": "~0.4.4",
-        "grunt-contrib-compass": "~1.0.1"
-    }
+  "name": "html-sass-gulp-starter",
+  "version": "2.0.0",
+  "description": "Barebones HTML boilerplate running Sass and Gulp.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/MadeInHaus/html-boilerplate.git"
+  },
+  "devDependencies": {
+    "aliasify": "^1.9.0",
+    "browser-sync": "^2.11.1",
+    "browserify": "^13.0.0",
+    "browserify-shim": "^3.8.12",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-changed": "^1.3.0",
+    "gulp-cssnano": "^2.1.1",
+    "gulp-filesize": "^0.0.6",
+    "gulp-htmlmin": "^1.3.0",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-sass": "^2.2.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.2",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.5",
+    "handlebars": "^4.0.5",
+    "minimist": "^1.2.0",
+    "node-slack": "0.0.7",
+    "pretty-hrtime": "^1.0.1",
+    "require-dir": "^0.3.0",
+    "s3": "^4.4.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
+  },
+  "dependencies": {
+  }
 }
