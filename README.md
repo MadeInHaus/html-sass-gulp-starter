@@ -1,6 +1,6 @@
 # Html-Sass-Gulp Starter
 
-A barebones starting point for HTML applications at [HAUS](http://madeinhaus.com).
+An ES6-ready barebones HTML boilerplate running Sass and Gulp.
 
 ## Getting Started
 

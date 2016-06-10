@@ -1,7 +1,7 @@
 {
   "name": "html-sass-gulp-starter",
   "version": "2.1.0",
-  "description": "Barebones HTML boilerplate running Sass and Gulp.",
+  "description": "An ES6-ready barebones HTML boilerplate running Sass and Gulp.",
   "repository": {
     "type": "git",
     "url": "git://github.com/MadeInHaus/html-boilerplate.git"
