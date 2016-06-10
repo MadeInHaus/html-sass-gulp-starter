@@ -1,10 +1,12 @@
-
-app = (function() {
-    return {
-        initialize: function() {
-            console.log('app initialized');
-        }
+class App {
+    constructor() {
+        console.log('App initialized');
+        this.foo = 'bar';
+        this.someMethod(this.foo);
     }
-}());
+    someMethod(val) {
+        console.log('foo:', val);
+    }
+}
 
-module.exports = app;
+export default App;
