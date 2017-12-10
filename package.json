@@ -7,6 +7,10 @@
     "type": "git",
     "url": "git://github.com/MadeInHaus/html-boilerplate.git"
   },
+  "scripts": {
+    "format":
+      "prettier-eslint --single-quote --trailing-comma es5 --tab-width 4 --prettierLast --write \"src/**/*.{js,jsx}\" \"gulp/**/*.js\""
+  },
   "license": "MIT",
   "devDependencies": {
     "babel-core": "6.26.0",
@@ -34,6 +38,9 @@
     "gulp-watch": "4.3.11",
     "minimist": "1.2.0",
     "node-slack": "0.0.7",
+    "prettier": "1.9.1",
+    "prettier-eslint": "8.2.5",
+    "prettier-eslint-cli": "4.4.2",
     "pretty-hrtime": "1.0.3",
     "require-dir": "0.3.2",
     "s3": "4.4.0",
