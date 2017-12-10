@@ -9,7 +9,7 @@
   },
   "scripts": {
     "format":
-      "prettier-eslint --single-quote --trailing-comma es5 --tab-width 4 --prettierLast --write \"src/**/*.{js,jsx}\" \"gulp/**/*.js\""
+      "prettier-eslint --logLevel debug --singleQuote --trailingComma es5 --tabWidth 4 --prettierLast --write \"src/**/*.{js,jsx}\" \"gulp/**/*.js\""
   },
   "license": "MIT",
   "devDependencies": {
