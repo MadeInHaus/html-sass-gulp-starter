@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var gulp = require('gulp');
 var settings = require('../config').settings;
@@ -15,12 +15,16 @@ var isQA = flags.qa || false;
 var isStaging = flags.staging || flags.stage || false;
 var isDev = flags.development || flags.dev || false;
 
-var env = _.find([isDev && 'development', isQA && 'qa', isStaging && 'staging', isProd && 'production']);
+var env = _.find([
+    isDev && 'development',
+    isQA && 'qa',
+    isStaging && 'staging',
+    isProd && 'production',
+]);
 settings = settings[env];
 console.log('Using these settings:\nenv: ', env, '\n\nsettings: ', settings);
 
 gulp.task('s3', ['production'], function() {
-
     // Keep sensitive credentials outside the repo
     var s = settings.slack;
     var aws = settings.aws;
@@ -35,10 +39,11 @@ gulp.task('s3', ['production'], function() {
     } else if (isDev) {
         folder = 'dev';
     } else {
-        console.error('\nError! Please specify an `--[environment]` when running the "deploy" task\n');
+        console.error(
+            '\nError! Please specify an `--[environment]` when running the "deploy" task\n'
+        );
         return;
     }
-
 
     var client = s3.createClient({
         maxAsyncS3: 20, // this is the default
@@ -46,7 +51,7 @@ gulp.task('s3', ['production'], function() {
         s3RetryDelay: 1000, // this is the default
         multipartUploadThreshold: 20971520, // this is the default (20 MB)
         multipartUploadSize: 15728640, // this is the default (15 MB)
-        s3Options: aws
+        s3Options: aws,
     });
 
     var params = {
@@ -55,8 +60,8 @@ gulp.task('s3', ['production'], function() {
         s3Params: {
             Bucket: aws.bucket,
             Prefix: aws.basePath + '/' + folder + '/',
-            ACL: 'public-read'
-        }
+            ACL: 'public-read',
+        },
     };
 
     console.log('\n\n*** Deploying to AWS S3 ***\n\n');
@@ -68,18 +73,29 @@ gulp.task('s3', ['production'], function() {
     });
 
     uploader.on('progress', function() {
-        console.log('progress', uploader.progressMd5Amount,
-            uploader.progressAmount, uploader.progressTotal);
+        console.log(
+            'progress',
+            uploader.progressMd5Amount,
+            uploader.progressAmount,
+            uploader.progressTotal
+        );
     });
 
     uploader.on('end', function() {
         console.log('done uploading');
         var slack = new Slack(s.hook_url, {});
 
-        gitUserInfo(function (user) {
+        gitUserInfo(function(user) {
             slack.send({
-                 text: s.message + folder + ' <http://' + aws.basePath + '.' + folder + '.haus.la>',
-                 username: user.name || user.email || "Anonymous"
+                text:
+                    s.message +
+                    folder +
+                    ' <http://' +
+                    aws.basePath +
+                    '.' +
+                    folder +
+                    '.haus.la>',
+                username: user.name || user.email || 'Anonymous',
             });
         });
     });

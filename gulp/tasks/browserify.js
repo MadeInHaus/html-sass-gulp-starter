@@ -20,16 +20,14 @@ var _ = require('lodash');
 
 var babelify = require('babelify');
 
-var browserifyTask = function (callback, devMode) {
-
+var browserifyTask = function(callback, devMode) {
     var bundleQueue = config.bundleConfigs.length;
 
-    var browserifyThis = function (bundleConfig) {
-
+    var browserifyThis = function(bundleConfig) {
         if (devMode) {
             // Add watchify args and debug (sourcemaps) option
             _.extend(bundleConfig, watchify.args, {
-                debug: true
+                debug: true,
             });
             // A watchify require/external bug that prevents proper recompiling,
             // so (for now) we'll ignore these options during development
@@ -40,24 +38,28 @@ var browserifyTask = function (callback, devMode) {
 
         b.transform(babelify);
 
-        var bundle = function () {
+        var bundle = function() {
             // Log when bundling starts
             bundleLogger.start(bundleConfig.outputName);
 
-            return b
-                .bundle()
-                // Report compile errors
-                .on('error', handleErrors)
-                // Use vinyl-source-stream to make the
-                // stream gulp compatible. Specify the
-                // desired output filename here.
-                .pipe(source(bundleConfig.outputName))
-                // Specify the output destination
-                .pipe(gulp.dest(bundleConfig.dest))
-                .on('end', reportFinished)
-                .pipe(browserSync.reload({
-                    stream: true
-                }));
+            return (
+                b
+                    .bundle()
+                    // Report compile errors
+                    .on('error', handleErrors)
+                    // Use vinyl-source-stream to make the
+                    // stream gulp compatible. Specify the
+                    // desired output filename here.
+                    .pipe(source(bundleConfig.outputName))
+                    // Specify the output destination
+                    .pipe(gulp.dest(bundleConfig.dest))
+                    .on('end', reportFinished)
+                    .pipe(
+                        browserSync.reload({
+                            stream: true,
+                        })
+                    )
+            );
         };
 
         if (devMode) {
@@ -75,7 +77,7 @@ var browserifyTask = function (callback, devMode) {
             if (bundleConfig.external) b.external(bundleConfig.external);
         }
 
-        var reportFinished = function () {
+        var reportFinished = function() {
             // Log when bundling completes
             bundleLogger.end(bundleConfig.outputName);
 
