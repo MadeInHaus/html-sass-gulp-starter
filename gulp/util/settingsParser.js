@@ -1,16 +1,16 @@
-var _ = require('lodash');
+const _ = require('lodash');
 
-var envs = ['development', 'qa', 'staging', 'production'];
+const envs = ['development', 'qa', 'staging', 'production'];
 
 module.exports = function(settings, defaultObj) {
-    var new_settings = {};
-    _.each(envs, function(env) {
-        var env_settings = settings[env] || {};
-        var new_setting = {};
+    const new_settings = {};
+    _.each(envs, env => {
+        const env_settings = settings[env] || {};
+        const new_setting = {};
         new_settings[env] = _.merge(
             new_setting,
             defaultObj || {},
-            settings['default'],
+            settings.default,
             env_settings
         );
     });

@@ -1,12 +1,12 @@
-var gulp = require('gulp');
-var config = require('../config').production;
-var cleanCSS = require('gulp-clean-css');
-var size = require('gulp-filesize');
+const gulp = require('gulp');
+const config = require('../config').production;
+const cleanCSS = require('gulp-clean-css');
+const size = require('gulp-filesize');
 
-gulp.task('minifyCss', ['sass'], function() {
-    return gulp
+gulp.task('minifyCss', ['sass'], () =>
+    gulp
         .src(config.cssSrc)
         .pipe(cleanCSS())
-        .pipe(gulp.dest(config.dest + '/css'))
-        .pipe(size());
-});
+        .pipe(gulp.dest(`${config.dest}/css`))
+        .pipe(size())
+);

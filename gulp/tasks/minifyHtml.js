@@ -1,10 +1,10 @@
-var gulp = require('gulp');
-var config = require('../config').markup;
-var htmlmin = require('gulp-htmlmin');
-var size = require('gulp-filesize');
+const gulp = require('gulp');
+const config = require('../config').markup;
+const htmlmin = require('gulp-htmlmin');
+const size = require('gulp-filesize');
 
-gulp.task('minifyHtml', function() {
-    return gulp
+gulp.task('minifyHtml', () =>
+    gulp
         .src(config.src)
         .pipe(
             htmlmin({
@@ -15,5 +15,5 @@ gulp.task('minifyHtml', function() {
             })
         )
         .pipe(gulp.dest(config.dest))
-        .pipe(size());
-});
+        .pipe(size())
+);

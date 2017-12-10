@@ -1,44 +1,46 @@
-/* browserify task
-   ---------------
-   Bundle javascripty things with browserify!
+/*
+ * Browserify task
+ * ---------------
+ * Bundle javascripty things with browserify!
+ *
+ * This task is set up to generate multiple separate bundles, from
+ * different sources, and to use Watchify when run from the default task.
+ *
+ * See browserify.bundleConfigs in gulp/config.js
+ */
 
-   This task is set up to generate multiple separate bundles, from
-   different sources, and to use Watchify when run from the default task.
+const browserify = require('browserify');
+const browserSync = require('browser-sync');
+const watchify = require('watchify');
+const bundleLogger = require('../util/bundleLogger');
+const gulp = require('gulp');
+const handleErrors = require('../util/handleErrors');
+const source = require('vinyl-source-stream');
+const config = require('../config').browserify;
+const _ = require('lodash');
 
-   See browserify.bundleConfigs in gulp/config.js
-*/
+const babelify = require('babelify');
 
-var browserify = require('browserify');
-var browserSync = require('browser-sync');
-var watchify = require('watchify');
-var bundleLogger = require('../util/bundleLogger');
-var gulp = require('gulp');
-var handleErrors = require('../util/handleErrors');
-var source = require('vinyl-source-stream');
-var config = require('../config').browserify;
-var _ = require('lodash');
+const browserifyTask = function(callback, devMode) {
+    let bundleQueue = config.bundleConfigs.length;
 
-var babelify = require('babelify');
-
-var browserifyTask = function(callback, devMode) {
-    var bundleQueue = config.bundleConfigs.length;
-
-    var browserifyThis = function(bundleConfig) {
+    const browserifyThis = function(bundleConfig) {
         if (devMode) {
             // Add watchify args and debug (sourcemaps) option
-            _.extend(bundleConfig, watchify.args, {
-                debug: true,
-            });
-            // A watchify require/external bug that prevents proper recompiling,
-            // so (for now) we'll ignore these options during development
+            _.extend(bundleConfig, watchify.args, { debug: true });
+
+            /*
+             * A watchify require/external bug that prevents proper recompiling,
+             * so (for now) we'll ignore these options during development
+             */
             bundleConfig = _.omit(bundleConfig, ['external', 'require']);
         }
 
-        var b = browserify(bundleConfig);
+        let b = browserify(bundleConfig);
 
         b.transform(babelify);
 
-        var bundle = function() {
+        const bundle = function() {
             // Log when bundling starts
             bundleLogger.start(bundleConfig.outputName);
 
@@ -47,18 +49,16 @@ var browserifyTask = function(callback, devMode) {
                     .bundle()
                     // Report compile errors
                     .on('error', handleErrors)
-                    // Use vinyl-source-stream to make the
-                    // stream gulp compatible. Specify the
-                    // desired output filename here.
+                    /*
+                     * Use vinyl-source-stream to make the
+                     * stream gulp compatible. Specify the
+                     * desired output filename here.
+                     */
                     .pipe(source(bundleConfig.outputName))
                     // Specify the output destination
                     .pipe(gulp.dest(bundleConfig.dest))
                     .on('end', reportFinished)
-                    .pipe(
-                        browserSync.reload({
-                            stream: true,
-                        })
-                    )
+                    .pipe(browserSync.reload({ stream: true }))
             );
         };
 
@@ -69,12 +69,21 @@ var browserifyTask = function(callback, devMode) {
             b.on('update', bundle);
             bundleLogger.watch(bundleConfig.outputName);
         } else {
-            // Sort out shared dependencies.
-            // b.require exposes modules externally
-            if (bundleConfig.require) b.require(bundleConfig.require);
-            // b.external excludes modules from the bundle, and expects
-            // they'll be available externally
-            if (bundleConfig.external) b.external(bundleConfig.external);
+            /*
+             * Sort out shared dependencies.
+             * b.require exposes modules externally
+             */
+            if (bundleConfig.require) {
+                b.require(bundleConfig.require);
+            }
+
+            /*
+             * B.external excludes modules from the bundle, and expects
+             * they'll be available externally
+             */
+            if (bundleConfig.external) {
+                b.external(bundleConfig.external);
+            }
         }
 
         var reportFinished = function() {
@@ -84,8 +93,10 @@ var browserifyTask = function(callback, devMode) {
             if (bundleQueue) {
                 bundleQueue--;
                 if (bundleQueue === 0) {
-                    // If queue is empty, tell gulp the task is complete.
-                    // https://github.com/gulpjs/gulp/blob/master/docs/API.md#accept-a-callback
+                    /*
+                     * If queue is empty, tell gulp the task is complete.
+                     * https://github.com/gulpjs/gulp/blob/master/docs/API.md#accept-a-callback
+                     */
                     callback();
                 }
             }

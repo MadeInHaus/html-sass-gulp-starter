@@ -4,6 +4,7 @@ class App {
         const foo = 'bar';
         this.someMethod(foo);
     }
+
     someMethod(val) {
         console.log('foo:', val);
     }
