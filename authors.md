@@ -1,3 +1,0 @@
-#### Primary Development ####
-- HAUS Team
-
