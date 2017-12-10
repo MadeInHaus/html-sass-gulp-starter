@@ -1,8 +1,8 @@
 class App {
     constructor() {
         console.log('App initialized');
-        this.foo = 'bar';
-        this.someMethod(this.foo);
+        const foo = 'bar';
+        this.someMethod(foo);
     }
     someMethod(val) {
         console.log('foo:', val);

@@ -1,12 +1,17 @@
 {
     "presets": [
-        "es2015",
+        ["env", {
+            "targets": {
+                "browsers": ["last 2 versions"]
+            }
+        }],
         "stage-2"
     ],
     "plugins": [
-        ["babel-plugin-module-alias", [
-              { "src": "./src/javascript/app/app", "expose": "app/app" },
-            ]
-        ]
+        ["module-resolver", {
+            "alias": {
+                "app": "./src/javascript/app"
+            }
+        }]
     ]
 }
