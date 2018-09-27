@@ -92,6 +92,3 @@ celerybeat.pid
 *.sw[op]
 nohup.out
 project/settings/hosts/localhost.py
-
-# Keep credentials out of the repo
-settings.json

@@ -1,0 +1,12 @@
+node_modules
+build
+dev.sh
+.git
+.docker
+Jenkinsfile
+_scripts
+docker-compose.*
+Dockerfile
+Dockerfile-dev
+README.md
+LICENSE.md

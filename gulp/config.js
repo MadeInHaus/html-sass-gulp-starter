@@ -1,27 +1,13 @@
-const dest = './build';
-const src = './src';
-
-let settings_json;
-
-try {
-    settings_json = require('../settings');
-} catch (e) {
-    console.log(
-        'settings.json file not found, some tasks may not work without this.'
-    );
-    console.log(e);
-}
-
-const settings = require('./util/settingsParser')(settings_json || {}, {
-    dest,
-});
+const dest = "./build";
+const src = "./src";
 
 module.exports = {
     browserSync: {
+        open: false,
         server: {
             // Serve up our build folder
-            baseDir: dest,
-        },
+            baseDir: dest
+        }
     },
     browserify: {
         /*
@@ -33,28 +19,28 @@ module.exports = {
             {
                 entries: `${src}/javascript/client.js`,
                 dest: `${dest}/js`,
-                outputName: 'client.js',
+                outputName: "client.js",
                 // Additional file extentions to make optional
-                extensions: ['.js', '.jsx'],
+                extensions: [".js", ".jsx"]
 
                 /*
                  * List of modules to make require-able externally
                  *require: ['some-module', 'another-module']
                  */
-            },
-        ],
+            }
+        ]
     },
     assets: {
         src: `${src}/assets/**`,
-        dest,
+        dest
     },
     images: {
         src: `${src}/images/**`,
-        dest: `${dest}/images`,
+        dest: `${dest}/images`
     },
     markup: {
         src: `${src}/html/**/*.html`,
-        dest,
+        dest
     },
     sass: {
         src: `${src}/sass/**/*.{sass,scss}`,
@@ -64,14 +50,13 @@ module.exports = {
              * Required if you want to use SASS syntax
              * See https://github.com/dlmanning/gulp-sass/issues/81
              */
-            sourceComments: 'map',
-            imagePath: '/images', // Used by the image-url helper
-        },
+            sourceComments: "map",
+            imagePath: "/images" // Used by the image-url helper
+        }
     },
     production: {
         cssSrc: `${dest}/css/*.css`,
         jsSrc: `${dest}/js/*.js`,
-        dest,
-    },
-    settings,
+        dest
+    }
 };
