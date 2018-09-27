@@ -4,7 +4,7 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 // serve static assets normally
-app.use(express.static(__dirname + '/dist'));
+app.use(express.static(__dirname + '/build'));
 
 app.get('*', function(request, response) {
     response.sendFile(path.resolve(__dirname, 'index.html'));
