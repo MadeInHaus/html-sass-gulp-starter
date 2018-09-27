@@ -1,0 +1,15 @@
+version: '2.1'
+services:
+    web:
+        image: '377941069960.dkr.ecr.us-east-1.amazonaws.com/html-sass-gulp-starter/web:${ENV:-local}'
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                NPM_REGISTRY: https://registry.npmjs.org/
+                PACKAGE_INSTALLER: npm
+        network_mode: 'bridge'
+        command: 'npm run start'
+        working_dir: /app/user
+        environment:
+            PORT: 3000
