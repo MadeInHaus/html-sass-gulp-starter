@@ -7,6 +7,9 @@
     "url": "git://github.com/MadeInHaus/html-boilerplate.git"
   },
   "scripts": {
+    "start": "npm run dev",
+    "dev": "gulp",
+    "build": "NODE_ENV=production && gulp production",
     "format": "prettier-eslint --logLevel debug --singleQuote --trailingComma es5 --tabWidth 4 --prettierLast --write \"src/**/*.{js,jsx}\" \"gulp/**/*.js\""
   },
   "license": "MIT",
