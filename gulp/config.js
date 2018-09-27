@@ -3,6 +3,7 @@ const src = "./src";
 
 module.exports = {
     browserSync: {
+        open: false,
         server: {
             // Serve up our build folder
             baseDir: dest
