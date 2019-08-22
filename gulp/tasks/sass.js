@@ -12,7 +12,7 @@ const taskDef = function() {
         .pipe(sourcemaps.init())
         .pipe(sass(config.settings))
         .on('error', handleErrors)
-        .pipe(autoprefixer({ browsers: ['last 2 versions'] }))
+        .pipe(autoprefixer({}))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(config.dest))
         .pipe(browserSync.stream());
