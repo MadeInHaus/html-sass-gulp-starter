@@ -57,7 +57,7 @@
     "gulp-sourcemaps": "2.6.5",
     "gulp-util": "3.0.8",
     "gulp-watch": "5.0.1",
-    "minimist": "1.2.0",
+    "minimist": "1.2.6",
     "node-slack": "0.0.7",
     "prettier": "1.18.2",
     "prettier-eslint": "9.0.0",
